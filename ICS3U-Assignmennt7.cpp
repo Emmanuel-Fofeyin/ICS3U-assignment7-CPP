@@ -1,58 +1,54 @@
-// Copyright (c) 2022 Emmanuel Fofeyin
+// Copyright (c) 2023 Emmanuel Fofeyin All rights reserved
 //
 // Created by: Emmanuel Fofeyin
 // Created on: Jan 2023
-// This program combines two lists by alternatingly taking elements.
+// This program reverses lists
 
+#include <array>
+#include <cmath>
+#include <iomanip>
 #include <iostream>
 #include <list>
+#include <random>
 #include <string>
 
-std::list<std::string> concatenatesLists(std::list<std::string> list1,
-                                         std::list<std::string> list2) {
-    std::string aSingleItem;
-    std::list<std::string> concatenatedLists;
+std::list<std::string> reverseList(std::list<std::string> notReversedList) {
+    // This function reverses lists
+    std::list<std::string> reversedList;
+    int counter = notReversedList.size() - 1;
 
-    for (std::string& aSingleItem : list1) {
-        concatenatedLists.push_back(aSingleItem);
+    for (std::string temp : notReversedList) {
+        reversedList.push_front(temp);
     }
-    for (std::string& aSingleItem : list2) {
-        concatenatedLists.push_back(aSingleItem);
-    }
-    return concatenatedLists;
+
+    return reversedList;
 }
 
 int main() {
-    // this function generates the random numbers
+    // This function is the main function
+    std::list<std::string> notReversedList;
+    std::list<std::string> reversedList;
+    std::string userInput;
 
-    std::list<std::string> firstList;
-    std::list<std::string> secondList;
-    std::string item;
-    std::list<std::string> combinedLists;
+    std::cout << "Keep entering anything and when you are done enter 'DONE' .\n"
+              << std::endl;
 
-    std::cout << "Please enter 5 items to place in the list:" << std::endl;
-    std::cout << "" << std::endl;
-    for (int counter = 0; counter < 5; counter++) {
-        std::cout << "Item" << counter + 1 << ": ";
-        std::getline(std::cin, item);
-        firstList.push_back(item);
+    while (userInput != "DONE") {
+        std::cout << "Insert:";
+        std::cin >> userInput;
+
+        if (userInput != "DONE") {
+            notReversedList.push_back(userInput);
+        }
     }
 
-    std::cout << "Please enter 5 items to place in the list:" << std::endl;
-    std::cout << "" << std::endl;
-    for (int counter = 0; counter < 5; counter++) {
-        std::cout << "Item" << counter + 1 << ": ";
-        std::getline(std::cin, item);
-        secondList.push_back(item);
+    reversedList = reverseList(notReversedList);
+
+    std::cout << "\nReversed:" << std::endl;
+
+    for (std::string temp : reversedList) {
+        std::cout << temp << std::endl;
     }
-    // calls function
-    combinedLists = concatenatesLists(firstList, secondList);
-    std::cout << "" << std::endl;
-    std::cout << "Here is your combined list: " << std::endl;
-    for (std::string& item : combinedLists) {
-        std::cout << item << ", ";
-    }
-    std::cout << std::endl;
 
     std::cout << "\nDone." << std::endl;
 }
